@@ -1,0 +1,17 @@
+{
+  "nom": "SoloQ Challenge Team Ultra 2",
+  "plateforme": "euw1",
+  "routage": "europe",
+  "debut": null,
+  "semaines": 4,
+  "gamesMaxParSemaine": 20,
+  "gamesMinTotal": 60,
+  "duoInterditPremieresGames": 5,
+  "gamesHorsQuota": "exclure",
+  "preSaisonGames": 20,
+  "joueurs": [
+    { "id": "joueur1", "nom": "Joueur 1", "riotId": "Pseudo#EUW", "role": "TOP" },
+    { "id": "joueur2", "nom": "Joueur 2", "riotId": "Pseudo2#EUW", "role": "JUNGLE" }
+  ],
+  "sanctions": []
+}

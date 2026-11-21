@@ -1,0 +1,10 @@
+{
+  "name": "soloq-challenge-team-ultra-2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "maj": "node scripts/update.mjs",
+    "demo": "node scripts/demo.mjs",
+    "serve": "npx --yes serve site"
+  }
+}
