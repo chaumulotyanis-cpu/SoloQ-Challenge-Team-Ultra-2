@@ -10,8 +10,36 @@
   "gamesHorsQuota": "exclure",
   "preSaisonGames": 20,
   "joueurs": [
-    { "id": "joueur1", "nom": "Joueur 1", "riotId": "Pseudo#EUW", "role": "TOP" },
-    { "id": "joueur2", "nom": "Joueur 2", "riotId": "Pseudo2#EUW", "role": "JUNGLE" }
+    {
+      "id": "banzay",
+      "nom": "Banzay",
+      "riotId": "Banzay#2869",
+      "role": ""
+    },
+    {
+      "id": "yayaaa",
+      "nom": "Yayaaa",
+      "riotId": "Yayaaa#ZEKA",
+      "role": ""
+    },
+    {
+      "id": "saulitude",
+      "nom": "Saulitude",
+      "riotId": "Saulitude#9718",
+      "role": ""
+    },
+    {
+      "id": "nabil-andrieu",
+      "nom": "Nabil Andrieu",
+      "riotId": "Nabil Andrieu#9523",
+      "role": ""
+    },
+    {
+      "id": "ultimus95",
+      "nom": "ULTIMUS95",
+      "riotId": "ULTIMUS95#ULTI",
+      "role": ""
+    }
   ],
   "sanctions": []
 }
