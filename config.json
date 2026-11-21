@@ -5,39 +5,45 @@
   "debut": null,
   "semaines": 4,
   "gamesMaxParSemaine": 15,
-  "gamesMinTotal": 60,
+  "gamesMinTotal": 40,
   "duoInterditPremieresGames": 5,
-  "gamesHorsQuota": "exclure",
+  "gamesHorsQuota": "compter",
   "preSaisonGames": 20,
   "joueurs": [
     {
       "id": "banzay",
       "nom": "Banzay",
       "riotId": "Banzay#2869",
-      "role": ""
+      "role": "JUNGLE"
     },
     {
       "id": "yayaaa",
       "nom": "Yayaaa",
       "riotId": "Yayaaa#ZEKA",
-      "role": ""
+      "role": "MIDDLE"
     },
     {
       "id": "saulitude",
       "nom": "Saulitude",
       "riotId": "Saulitude#9718",
-      "role": ""
+      "role": "UTILITY"
     },
     {
       "id": "nabil-andrieu",
       "nom": "Nabil Andrieu",
       "riotId": "Nabil Andrieu#9523",
-      "role": ""
+      "role": "BOTTOM"
     },
     {
       "id": "ultimus95",
       "nom": "ULTIMUS95",
       "riotId": "ULTIMUS95#ULTI",
+      "role": "TOP"
+    },
+    {
+      "id": "kiho-rank-1",
+      "nom": "KIHO RANK 1",
+      "riotId": "KIHO RANK 1 #KIHO",
       "role": ""
     }
   ],
