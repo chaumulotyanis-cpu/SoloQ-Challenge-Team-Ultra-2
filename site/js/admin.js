@@ -173,14 +173,14 @@ async function panneau(info = '') {
       cfg.gamesMinTotal = Number(q('#min').value);
       cfg.gamesHorsQuota = q('#hq').value;
     };
-    main.querySelectorAll('[data-j]').forEach((el) => el.addEventListener('change', () => { cfg.joueurs[el.dataset.j][el.dataset.champ] = el.value.trim(); }));
+    main.querySelectorAll('[data-j]').forEach((el) => el.addEventListener('change', () => { cfg.joueurs[el.dataset.j][el.dataset.champ] = el.dataset.champ === 'riotId' ? el.value.trim().replace(/\s*#\s*/, '#') : el.value.trim(); }));
     main.querySelectorAll('[data-suppr-joueur]').forEach((b) => (b.onclick = () => {
       const j = cfg.joueurs[b.dataset.supprJoueur];
       if (confirm(`Retirer ${j.nom} du challenge ?`)) { lireChallenge(); cfg.joueurs.splice(b.dataset.supprJoueur, 1); info = ''; rendre(); }
     }));
     main.querySelectorAll('[data-suppr-sanction]').forEach((b) => (b.onclick = () => { lireChallenge(); cfg.sanctions.splice(b.dataset.supprSanction, 1); info = ''; rendre(); }));
     q('#ajout-joueur').onclick = () => {
-      const nom = q('#nj-nom').value.trim(), riotId = q('#nj-rid').value.trim();
+      const nom = q('#nj-nom').value.trim(), riotId = q('#nj-rid').value.trim().replace(/\s*#\s*/, '#');
       if (!nom || !/^.+#.+$/.test(riotId)) return message('Indique un nom et un Riot ID au format Pseudo#TAG.', 'erreur');
       let id = nom.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'joueur';
       while (cfg.joueurs.some((j) => j.id === id)) id += '-2';
