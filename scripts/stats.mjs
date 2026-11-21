@@ -33,7 +33,6 @@ export function construireStats({ cfg, joueurs, now = Date.now(), version, demo 
   const { debut, fin, phase, semaine } = phaseChallenge(cfg, now);
   const challengeActif = phase === 'en-cours' || phase === 'termine';
   const idParPuuid = new Map(joueurs.filter((j) => j.puuid).map((j) => [j.puuid, j.id]));
-  const nomParId = new Map(joueurs.map((j) => [j.id, j.nom]));
 
   const resultat = joueurs.map((j) => {
     const toutes = (j.matches || []).filter((m) => !m.remake).sort((a, b) => a.t - b.t);
@@ -64,12 +63,6 @@ export function construireStats({ cfg, joueurs, now = Date.now(), version, demo 
     // --- Alertes automatiques
     const alertes = [];
     for (const s of semaines) if (s.horsQuota) alertes.push(`Semaine ${s.n} : ${s.horsQuota} game(s) au-delà du plafond de ${cfg.gamesMaxParSemaine}`);
-    if (challengeActif) {
-      games.slice(0, cfg.duoInterditPremieresGames).forEach((g, i) => {
-        const potes = (g.allies || []).map((p) => idParPuuid.get(p)).filter(Boolean);
-        if (potes.length) alertes.push(`Placement ${i + 1} : dans la même équipe que ${potes.map((p) => nomParId.get(p)).join(', ')} (duo possible, à vérifier)`);
-      });
-    }
 
     // --- Champions
     const champs = new Map();

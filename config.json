@@ -4,7 +4,7 @@
   "routage": "europe",
   "debut": null,
   "semaines": 4,
-  "gamesMaxParSemaine": 20,
+  "gamesMaxParSemaine": 15,
   "gamesMinTotal": 60,
   "duoInterditPremieresGames": 5,
   "gamesHorsQuota": "exclure",

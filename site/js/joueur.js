@@ -1,4 +1,4 @@
-import { demarrer, bandeauStatut, avatar, rangHtml, roleHtml, imgChamp, esc, fmtPct, fmtNb, fmtDate, depuis, getMoi, setMoi } from './app.js';
+import { demarrer, bandeauStatut, carton, avatar, rangHtml, roleHtml, imgChamp, esc, fmtPct, fmtNb, fmtDate, depuis, getMoi, setMoi } from './app.js';
 
 const d = await demarrer('');
 if (d) {
@@ -25,7 +25,7 @@ if (d) {
         ${s.horsQuota ? `<div class="quota plein">+${s.horsQuota} hors quota</div>` : ''}</div>`;
     }).join('')}</div>` : '';
 
-    const infractions = [...j.sanctions.map((s) => `<li class="sanction">⚖️ <strong>Sanction</strong> : ${esc(s.raison)}${s.malusWinrate ? ` (−${s.malusWinrate} pts de winrate)` : ''}${s.date ? ` · ${fmtDate(s.date)}` : ''}</li>`),
+    const infractions = [...j.sanctions.map((s) => `<li class="sanction">${carton(s.malusWinrate) || '<span class="carton"></span>'} ${esc(s.raison)}${s.date ? ` · ${fmtDate(s.date)}` : ''}</li>`),
       ...j.alertes.map((a) => `<li>🚩 ${esc(a)}</li>`)];
 
     const champions = j.champions.length ? `<div class="tableau-wrap"><table><thead><tr><th>Champion</th><th>Games</th><th>Winrate</th><th>KDA</th></tr></thead><tbody>
@@ -50,7 +50,7 @@ if (d) {
       </section>
       ${j.erreur ? `<div class="bandeau erreur">Dernière mise à jour en échec : ${esc(j.erreur)}</div>` : ''}
       <div class="grille tuiles">
-        ${tuile('Winrate', fmtPct(j.winrateAjuste), j.malus ? `${fmtPct(j.winrate)} − ${j.malus} pts de malus` : actif ? 'challenge' : 'saison en cours')}
+        ${tuile('Winrate', fmtPct(j.winrateAjuste), j.malus ? `${fmtPct(j.winrate)} ${carton(j.malus)}` : actif ? 'challenge' : 'saison en cours')}
         ${tuile('Victoires / Défaites', `<span style="color:var(--victoire)">${j.victoires}</span> / <span style="color:var(--defaite)">${j.defaites}</span>`, `${j.games} games`)}
         ${c.phase === 'en-cours' ? tuile('Restant cette semaine', j.restantSemaine, j.restantSemaine === 0 ? '⛔ ne plus relancer' : `sur ${c.gamesMaxParSemaine}`) : ''}
         ${actif ? tuile('Quota minimum', `${j.games} / ${c.gamesMinTotal}`, j.eligible ? '✅ atteint' : `encore ${c.gamesMinTotal - j.games} games`) : ''}
@@ -60,7 +60,7 @@ if (d) {
         ${tuile('Participation kills', `${m.kp} %`)}
         ${tuile('Score de vision', m.vision)}
       </div>
-      ${infractions.length ? `<h2>Infractions & points à vérifier</h2><ul class="liste-alertes">${infractions.join('')}</ul>` : ''}
+      ${infractions.length ? `<h2>Sanctions & infractions</h2><ul class="liste-alertes">${infractions.join('')}</ul>` : ''}
       ${semaines}
       ${j.progression.length > 1 ? `<h2>Évolution du winrate</h2><div class="carte graphique">${graphique(j.progression)}</div>` : ''}
       <h2>Champions${actif ? '' : ` <span class="muted" style="font-size:.8rem">(${c.preSaisonGames} dernières games)</span>`}</h2>${champions}

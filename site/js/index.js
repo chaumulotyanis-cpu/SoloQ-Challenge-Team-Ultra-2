@@ -1,4 +1,4 @@
-import { demarrer, bandeauStatut, avatar, rangHtml, roleHtml, barreWr, lienJoueur, getMoi, esc, fmtPct } from './app.js';
+import { demarrer, bandeauStatut, avatar, rangHtml, roleHtml, barreWr, lienJoueur, carton, getMoi, esc, fmtPct } from './app.js';
 
 const d = await demarrer('classement');
 if (d) {
@@ -29,7 +29,8 @@ if (d) {
   const lignes = d.joueurs.map((j) => {
     let statut = '';
     if (j.erreur) statut = `<span title="${esc(j.erreur)}">⚠️</span>`;
-    else if (j.sanctions.length || j.alertes.length) statut = `<span title="${esc([...j.sanctions.map((s) => s.raison), ...j.alertes].join('\n'))}">🚩</span>`;
+    if (j.malus) statut += carton(j.malus, j.sanctions.map((s) => s.raison).join('\n'));
+    if (j.alertes.length) statut += ` <span title="${esc(j.alertes.join('\n'))}">🚩</span>`;
     if (c.phase === 'termine') statut += j.eligible ? ' ✅' : ' <span title="Quota minimum non atteint">❌</span>';
     const quota = c.phase === 'en-cours'
       ? `<td class="quota num ${j.restantSemaine === 0 ? 'plein' : ''}">${j.gamesSemaine}/${c.gamesMaxParSemaine}</td>` : '';
@@ -39,7 +40,7 @@ if (d) {
       <td><div class="joueur">${avatar(j)}<div><div class="nom">${esc(j.nom)}</div><div class="rid">${esc(j.riotId)}</div></div></div></td>
       <td class="col-opt">${roleHtml(j.role)}</td>
       <td>${rangHtml(j.rang)}</td>
-      <td>${barreWr(j.winrateAjuste)}${j.malus ? `<div class="malus">dont −${j.malus} pts de malus</div>` : ''}</td>
+      <td>${barreWr(j.winrateAjuste)}</td>
       <td class="wl num"><span class="v">${j.victoires}V</span> · <span class="d">${j.defaites}D</span></td>
       ${quota}${total}<td class="statut">${statut}</td></tr>`;
   }).join('');
@@ -52,7 +53,7 @@ if (d) {
       <tbody>${lignes || '<tr><td colspan="9" class="vide">Aucun joueur inscrit pour le moment.</td></tr>'}</tbody>
     </table></div>
     <p class="muted" style="font-size:.8rem;margin-top:10px">${actif
-      ? `Winrate calculé uniquement sur les parties Solo/Duo du challenge${c.gamesHorsQuota === 'exclure' ? ', hors parties au-delà du plafond hebdomadaire' : ''}. 🚩 = infraction ou point à vérifier.`
+      ? `Winrate calculé uniquement sur les parties Solo/Duo du challenge${c.gamesHorsQuota === 'exclure' ? ', hors parties au-delà du plafond hebdomadaire' : ''}. <span class="carton"></span> = sanction (points retirés au winrate) · 🚩 = games au-delà du plafond.`
       : 'Winrate de la saison Solo/Duo en cours. Le vrai classement démarrera avec le challenge.'}</p>`;
 
   main.querySelectorAll('tbody tr[data-id]').forEach((tr) => tr.addEventListener('click', () => (location.href = lienJoueur(tr.dataset.id))));

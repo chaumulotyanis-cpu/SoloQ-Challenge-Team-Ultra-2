@@ -11,7 +11,7 @@ const entre = (a, b) => Math.floor(a + alea() * (b - a + 1));
 const now = Date.now();
 const cfg = {
   nom: 'SoloQ Challenge Team Ultra 2', debut: new Date(now - 16 * 864e5).toISOString(), semaines: 4,
-  gamesMaxParSemaine: 20, gamesMinTotal: 60, duoInterditPremieresGames: 5, gamesHorsQuota: 'exclure', preSaisonGames: 20,
+  gamesMaxParSemaine: 15, gamesMinTotal: 60, duoInterditPremieresGames: 5, gamesHorsQuota: 'exclure', preSaisonGames: 20,
   sanctions: [{ joueur: 'j4', raison: 'Relance après le plafond hebdomadaire', malusWinrate: 3, date: new Date(now - 5 * 864e5).toISOString() }],
 };
 const roles = ['TOP', 'JUNGLE', 'MIDDLE', 'BOTTOM', 'UTILITY'];

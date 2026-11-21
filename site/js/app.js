@@ -48,6 +48,7 @@ export function roleHtml(role) {
 }
 export const roleFr = (role) => ROLES[(role || '').toUpperCase()]?.fr ?? '—';
 export const barreWr = (wr) => `<div class="barre-wr"><div class="piste"><div class="remplie" style="width:${Math.max(0, Math.min(100, wr))}%"></div></div><span class="val num">${fmtPct(wr)}</span></div>`;
+export const carton = (malus, titre = '') => (malus ? `<span class="carton" title="${esc(titre)}">−${malus}</span>` : '');
 export const lienJoueur = (id) => `joueur.html?id=${encodeURIComponent(id)}`;
 
 // ---------- Profil "connecté" (mémorisé dans le navigateur)
@@ -57,7 +58,7 @@ export const setMoi = (id) => { try { id ? localStorage.setItem(CLE_MOI, id) : l
 
 // ---------- Mise en page commune
 export function enTete(actif) {
-  const liens = [['index.html', 'Classement', 'classement'], ['matchup.html', '1V1 · Matchup', 'matchup'], ['regles.html', 'Règles', 'regles']];
+  const liens = [['index.html', 'Classement', 'classement'], ['matchup.html', '1V1 · Matchup', 'matchup'], ['regles.html', 'Règles', 'regles'], ['admin.html', '🔒 Admin', 'admin']];
   document.body.insertAdjacentHTML('afterbegin', `
     <header class="entete"><div class="entete-int">
       <a class="logo" href="index.html"><span class="losange"></span>SoloQ Challenge <span>Ultra 2</span></a>
