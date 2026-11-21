@@ -120,6 +120,7 @@ for (const k of Object.keys(cache.joueurs)) if (!actifs.has(k)) delete cache.jou
 
 const stats = construireStats({ cfg, joueurs, now, version });
 await mkdir(new URL('site/data/', racine), { recursive: true });
+await mkdir(new URL('data/', racine), { recursive: true });
 await writeFile(new URL('data/cache.json', racine), JSON.stringify(cache));
 await writeFile(new URL('site/data/stats.json', racine), JSON.stringify(stats));
 console.log(`📊 stats.json généré (${phase}).`);
